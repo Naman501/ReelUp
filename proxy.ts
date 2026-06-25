@@ -2,7 +2,7 @@ import withAuth from "next-auth/middleware"
 import { NextResponse } from "next/server";
 
 export default withAuth(
-    function middleware(){
+    function proxy(){
 return NextResponse.next()
     },
 {
@@ -11,7 +11,7 @@ return NextResponse.next()
                 const{pathname}= req.nextUrl;
                 // allow auth-related routes
 
-                if(pathname.startsWith('/api/auth')|| pathname==="login" || pathname==="register"){
+                if(pathname.startsWith('/api/auth')|| pathname==="/login" || pathname==="/register"){
                     return true
                 }
                 // public path
@@ -27,8 +27,8 @@ return NextResponse.next()
 
 
 
-export const config={
-    matcher:[
-        '/((?!api|_next/static|_next/image|favicon.ico).*)'
-    ]
-}
+export const config = {
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)",
+  ],
+};
